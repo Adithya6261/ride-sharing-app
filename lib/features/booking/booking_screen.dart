@@ -54,13 +54,12 @@ class _BookingScreenState extends State<BookingScreen> {
     super.dispose();
   }
 
-void _onSearchChanged(String value, {required bool isPickup}) {
+  void _onSearchChanged(String value, {required bool isPickup}) {
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 700), () {
       _searchAndUpdateMap(value, isPickup: isPickup);
     });
   }
-
 
   /// 🔍 Geocode → marker → polyline → distance
   Future<void> _searchAndUpdateMap(
@@ -206,7 +205,10 @@ void _onSearchChanged(String value, {required bool isPickup}) {
           rideType: selectedType,
         );
 
-    context.read<DriverProvider>().assignDriver();
+    context.read<DriverProvider>().assignDriver(
+          pickup: _pickupLatLng!,
+          drop: _dropLatLng!,
+        );
 
     Navigator.pushReplacement(
       context,

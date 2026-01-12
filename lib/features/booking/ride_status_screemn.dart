@@ -16,6 +16,16 @@ class RideStatusScreen extends StatefulWidget {
 class _RideStatusScreenState extends State<RideStatusScreen> {
   GoogleMapController? _mapController;
 
+@override
+  void initState() {
+    super.initState();
+
+    context.read<DriverProvider>().assignDriver(
+          pickup: const LatLng(17.3850, 78.4867),
+          drop: const LatLng(17.3950, 78.4967),
+        );
+  }
+
   /// Temporary mock coordinates
   static const LatLng pickup = LatLng(17.3850, 78.4867);
   static const LatLng drop = LatLng(17.3950, 78.4967);
