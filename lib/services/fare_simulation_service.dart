@@ -13,7 +13,7 @@ class FareSimulationService {
     final random = Random();
 
     Timer.periodic(const Duration(seconds: 2), (timer) {
-      if (trip.status == TripStatus.completed || trip.status == TripStatus.cancelled) {
+      if (trip.status == TripStatus.completed ) {
         timer.cancel();
         return;
       }

@@ -28,14 +28,13 @@ class DashboardScreen extends StatelessWidget {
           ),
         ],
       ),
-
       body: Stack(
         children: [
           SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 120),
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 120),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 StatsCards(),
                 SizedBox(height: 24),
                 TripsChart(),
@@ -44,8 +43,6 @@ class DashboardScreen extends StatelessWidget {
               ],
             ),
           ),
-
-          /// 🔥 Uber-style persistent CTA
           Align(
             alignment: Alignment.bottomCenter,
             child: BookRideCTA(

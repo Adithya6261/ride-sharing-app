@@ -12,10 +12,22 @@ class TripProvider extends ChangeNotifier {
   final TripRepository _repository = TripRepository();
   final Uuid _uuid = const Uuid();
 
-  /// 🔹 UI reads trips ONLY from provider
+  String? _activeTripId;
+
+  /// 🔹 All trips (for dashboard & history)
   List<TripModel> get trips => _repository.fetchTrips().reversed.toList();
 
-  /// 🔹 Booking → create trip → start simulations
+  /// 🔹 ONLY active trip (for RideStatusScreen)
+  TripModel? get activeTrip {
+    if (_activeTripId == null) return null;
+
+    return trips.firstWhere(
+      (t) => t.id == _activeTripId,
+      orElse: () => trips.first,
+    );
+  }
+
+  /// 🔹 Create trip + start simulations
   void addTrip({
     required String pickup,
     required String drop,
@@ -32,13 +44,15 @@ class TripProvider extends ChangeNotifier {
 
     _repository.addTrip(trip);
 
-    /// Ride lifecycle simulation
+    _activeTripId = trip.id;
+
+    /// Ride lifecycle
     RideSimulationService.simulate(
       trip: trip,
       onUpdate: notifyListeners,
     );
 
-    /// Live fare updates
+    /// Live fare
     FareSimulationService.simulate(
       trip: trip,
       onUpdate: notifyListeners,
@@ -47,26 +61,18 @@ class TripProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void startStatusFlow(TripModel trip) {
-    Future.delayed(const Duration(seconds: 2), () {
-      trip.status = TripStatus.driverAssigned;
-      notifyListeners();
-    });
-
-    Future.delayed(const Duration(seconds: 6), () {
-      trip.status = TripStatus.rideStarted;
-      notifyListeners();
-    });
-
-    Future.delayed(const Duration(seconds: 18), () {
-      trip.status = TripStatus.completed;
-      notifyListeners();
-    });
+  /// 🔹 Clear active trip after completion
+  void clearActiveTrip() {
+    _activeTripId = null;
+    notifyListeners();
   }
 
-
-  /// 🔹 Used by TripsScreen (swipe delete)
+  /// 🔹 Delete trip (history)
   void deleteTrip(String id) {
+    if (_activeTripId == id) {
+      _activeTripId = null;
+    }
+
     _repository.deleteTrip(id);
     notifyListeners();
   }

@@ -22,7 +22,7 @@ class _RideStatusScreenState extends State<RideStatusScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final trip = context.watch<TripProvider>().trips.first;
+    final trip = context.watch<TripProvider>().activeTrip;
     final driver = context.watch<DriverProvider>().driver;
 
     final markers = <Marker>{
@@ -57,7 +57,7 @@ class _RideStatusScreenState extends State<RideStatusScreen> {
                 zoom: 14,
               ),
               markers: markers,
-              polylines:  {
+              polylines: {
                 Polyline(
                   polylineId: PolylineId('route'),
                   points: [pickup, drop],
@@ -80,7 +80,7 @@ class _RideStatusScreenState extends State<RideStatusScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    trip.status.label,
+                    trip!.status.label,
                     style: const TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
