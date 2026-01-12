@@ -1,7 +1,6 @@
 import 'dart:math';
 
 class DistanceUtils {
-  /// Haversine formula – returns KM
   static double calculateKm({
     required double lat1,
     required double lon1,

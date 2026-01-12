@@ -6,7 +6,6 @@ import '../core/constants/ride_types.dart';
 class DashboardProvider extends ChangeNotifier {
   List<TripModel> _completedTrips = [];
 
-  /// Called automatically by ProxyProvider
   void updateTrips(List<TripModel> allTrips) {
     _completedTrips = allTrips.where((t) => t.status == TripStatus.completed).toList();
 

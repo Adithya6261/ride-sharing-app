@@ -61,7 +61,6 @@ class _BookingScreenState extends State<BookingScreen> {
     });
   }
 
-  /// 🔍 Geocode → marker → polyline → distance
   Future<void> _searchAndUpdateMap(
     String address, {
     required bool isPickup,
@@ -106,7 +105,7 @@ class _BookingScreenState extends State<BookingScreen> {
     }
   }
 
-  /// 🧮 Distance + polyline
+  /// Distance & polyline
   void _updatePolylineAndDistance() {
     if (_pickupLatLng == null || _dropLatLng == null) return;
 
@@ -133,7 +132,7 @@ class _BookingScreenState extends State<BookingScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          /// 🗺️ MAP
+          
           GoogleMap(
             initialCameraPosition: _initialCameraPosition,
             markers: _markers,
@@ -142,7 +141,7 @@ class _BookingScreenState extends State<BookingScreen> {
             onMapCreated: (c) => _mapController = c,
           ),
 
-          /// ⬆️ BOTTOM SHEET
+         
           DraggableScrollableSheet(
             initialChildSize: 0.45,
             minChildSize: 0.35,
@@ -177,7 +176,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                     const SizedBox(height: 16),
 
-                    /// 💰 LIVE FARE
+                   
                     FareLiveView(
                       rideType: selectedType,
                       distanceKm: _distanceKm,

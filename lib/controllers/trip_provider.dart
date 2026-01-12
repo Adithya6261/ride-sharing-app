@@ -14,10 +14,10 @@ class TripProvider extends ChangeNotifier {
 
   String? _activeTripId;
 
-  /// 🔹 All trips (for dashboard & history)
+  /// All trips (for dashboard & history)
   List<TripModel> get trips => _repository.fetchTrips().reversed.toList();
 
-  /// 🔹 ONLY active trip (for RideStatusScreen)
+  /// ONLY active trip (for RideStatusScreen)
   TripModel? get activeTrip {
     if (_activeTripId == null) return null;
 
@@ -27,7 +27,7 @@ class TripProvider extends ChangeNotifier {
     );
   }
 
-  /// 🔹 Create trip + start simulations
+  /// Create trip + start simulations
   void addTrip({
     required String pickup,
     required String drop,
@@ -61,13 +61,13 @@ class TripProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// 🔹 Clear active trip after completion
+  /// Clear active trip after completion
   void clearActiveTrip() {
     _activeTripId = null;
     notifyListeners();
   }
 
-  /// 🔹 Delete trip (history)
+  /// Delete trip (history)
   void deleteTrip(String id) {
     if (_activeTripId == id) {
       _activeTripId = null;

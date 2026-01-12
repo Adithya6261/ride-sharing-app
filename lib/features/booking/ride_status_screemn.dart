@@ -58,7 +58,7 @@ class _RideStatusScreenState extends State<RideStatusScreen> {
       appBar: AppBar(title: const Text('Your Ride')),
       body: Column(
         children: [
-          /// 🗺️ MAP
+         
           Expanded(
             flex: 3,
             child: GoogleMap(

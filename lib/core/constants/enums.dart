@@ -6,7 +6,7 @@ enum TripStatus {
   cancelled,
 }
 
-extension TripStatusX on TripStatus {
+extension Tripstatus on TripStatus {
   String get label {
     switch (this) {
       case TripStatus.requested:

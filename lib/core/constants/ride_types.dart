@@ -1,6 +1,6 @@
 enum RideType { mini, sedan, auto, bike }
 
-extension RideTypeX on RideType {
+extension Ridetypes on RideType {
   String get label {
     switch (this) {
       case RideType.mini:

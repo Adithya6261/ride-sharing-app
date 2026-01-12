@@ -34,7 +34,7 @@ class DriverProvider extends ChangeNotifier {
 
   void _onDriverArrived() {
     if (driver != null && _drop != null) {
-      // 🔥 SNAP DRIVER TO DROP
+      // SNAP DRIVER TO DROP
       driver!
         ..latitude = _drop!.latitude
         ..longitude = _drop!.longitude

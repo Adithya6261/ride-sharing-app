@@ -11,7 +11,7 @@ class BudgetProvider extends ChangeNotifier {
 
   List<BudgetModel> get budgets => _repository.fetchBudgets();
 
-  /// Set / update monthly limit
+  /// Set update monthly limit
   void setLimit(RideType type, double limit) {
     final existing = _repository.getByRideType(type);
 
